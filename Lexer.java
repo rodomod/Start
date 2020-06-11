@@ -1,23 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package own.pars;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @author odministrator
- */
 public final class Lexer {
     public static List<Token> lexser(String str) {
         return new Lexer(str).lexser();
            }
+    
     private static final String OPERATOR_CHARS = "+-*/()";
     
     private static final Map<String, TokenType> OPERATORS;
@@ -30,6 +20,7 @@ public final class Lexer {
         OPERATORS.put("(", TokenType.LPAR);
         OPERATORS.put(")", TokenType.PPAR);
                  }
+    
     private final  String str;
     private final  int length;
     private final  List<Token> tokens;
@@ -44,32 +35,32 @@ public Lexer(String str) {
 public List<Token> lexser() {
         while(pos < length) {
             final char current = peek(0);
-        if(Character.isDigit(current)) lexserNumber();
-        else if(current == '#') {
+            if(Character.isDigit(current)) lexserNumber();
+            else if(current == '#') {
                 next();
                 lexserHexNumber();
-                  }
-        else if(OPERATOR_CHARS.indexOf(current) != -1) {
+            }
+            else if(OPERATOR_CHARS.indexOf(current) != -1) {
                 lexserOperator();
-        }else{
+            }else{
             next();
             }
         }
         return tokens;
     }
 private void lexserNumber() {
-                 clearBuffer();
-             char current = peek(0);
+        clearBuffer();
+        char current = peek(0);
         if(current == '0' && (peek(1) == 'x' || (peek(1) == 'X'))) {
             next();
             next();
             lexserHexNumber();
             return;
               }
-       while(true) {
-        if(current == '.') {
-        if(buffer.indexOf(".") != -1);
-        }else if(!Character.isDigit(current)) {
+        while(true) {
+            if(current == '.') {
+            if(buffer.indexOf(".") != -1);
+            }else if(!Character.isDigit(current)) {
                 break;
             }
             buffer.append(current);
@@ -77,19 +68,18 @@ private void lexserNumber() {
             }
         addToken(TokenType.NUMBER, buffer.toString());
           }
-    
 private void lexserHexNumber() {
-                   clearBuffer();
-            char current = peek(0);
-       while(isHexNumber(current) || (current == '_')) {
-        if(current != '_') {
+        clearBuffer();
+        char current = peek(0);
+        while (isHexNumber(current) || (current == '_')) {
+            if(current != '_') {
            buffer.append(current);
             }
             current = next();
-            }
+        }
         if(buffer.length() > 0) {
-          addToken(TokenType.HEX_NUMBER, buffer.toString());
-            }
+            addToken(TokenType.HEX_NUMBER, buffer.toString());
+        }
     }
 private static boolean isHexNumber(char current) {
         return Character.isDigit(current)
@@ -102,14 +92,14 @@ private void lexserOperator() {
         if(peek(1) == '/') {
                 next();
                 next(); return;
-        }else if(peek(1) == '*') {
+       }else if(peek(1) == '*') {
                 next();
                 next(); return;
             }
         }
         clearBuffer();
-       while(true) {
-           final String text = buffer.toString();
+        while(true) {
+    final String text = buffer.toString();
        if(!text.isEmpty() && !OPERATORS.containsKey(text + current)) {
                 addToken(OPERATORS.get(text));
                 return;
@@ -126,8 +116,8 @@ private char next() {
              return peek(0);                        
     }
 private char peek(int realPosition) {
-           final int position = pos + realPosition;
-       if(position >= length) return '\0';
+        final int position = pos + realPosition;
+        if(position >= length) return '\0';
         return str.charAt(position);
     }
 private void addToken(TokenType type) {
