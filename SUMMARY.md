@@ -7,5 +7,5 @@
 * [Start](Polisy.java)
 * [Start](Token.java)
 * [Start](TokenType.java)
-* [Start](start.JPEG)
+* [Start](start.png)
 * [LICENSE](LICENSE.md)
