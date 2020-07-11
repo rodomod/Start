@@ -16,4 +16,4 @@
 ✦ Some  text-->  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 90%  
 
 ✦
-![](start.png)
+![](startRU.png)

@@ -1,3 +1,5 @@
+package own;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,17 +10,17 @@ public final class Lexer {
         return new Lexer(str).lexser();
            }
     
-    private static final String OPERATOR_CHARS = "+-*/()";
+    private static final String OPERATOR_CHAR = "+-*/()";
     
-    private static final Map<String, TokenType> OPERATORS;
+    private static final Map<String, TokenType> OPERATOR;
             static {
-        OPERATORS = new HashMap<>();
-        OPERATORS.put("+", TokenType.SUMM);
-        OPERATORS.put("-", TokenType.SUB);
-        OPERATORS.put("*", TokenType.MULL);
-        OPERATORS.put("/", TokenType.DIVIDE);
-        OPERATORS.put("(", TokenType.LPAR);
-        OPERATORS.put(")", TokenType.PPAR);
+        OPERATOR = new HashMap<>();
+        OPERATOR.put("+", TokenType.SUMM);
+        OPERATOR.put("-", TokenType.SUB);
+        OPERATOR.put("*", TokenType.MULL);
+        OPERATOR.put("/", TokenType.DIVIDE);
+        OPERATOR.put("(", TokenType.LPAR);
+        OPERATOR.put(")", TokenType.PPAR);
                  }
     
     private final  String str;
@@ -36,11 +38,11 @@ public List<Token> lexser() {
         while(pos < length) {
             final char current = peek(0);
             if(Character.isDigit(current)) lexserNumber();
-            else if(current == '#') {
+           else if(current == '#') {
                 next();
                 lexserHexNumber();
             }
-            else if(OPERATOR_CHARS.indexOf(current) != -1) {
+            else if(OPERATOR_CHAR.indexOf(current) != -1) {
                 lexserOperator();
             }else{
             next();
@@ -100,8 +102,8 @@ private void lexserOperator() {
         clearBuffer();
         while(true) {
     final String text = buffer.toString();
-       if(!text.isEmpty() && !OPERATORS.containsKey(text + current)) {
-                addToken(OPERATORS.get(text));
+       if(!text.isEmpty() && !OPERATOR.containsKey(text + current)) {
+                addToken(OPERATOR.get(text));
                 return;
                 }
             buffer.append(current);

@@ -1,3 +1,5 @@
+package own;
+
 public final class Token {
     private  TokenType type;
     private String text;

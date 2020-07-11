@@ -1,3 +1,5 @@
+package own;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,7 +66,7 @@ private Polisy primary(){
       if(match(TokenType.NUMBER)){
           return new NumberPolisy(Double.parseDouble(current.getText()));
                }
-       if(match(TokenType.HEX_NUMBER)) {
+      if(match(TokenType.HEX_NUMBER)) {
             return new NumberPolisy(Long.parseLong(current.getText(), 16));
         }
       if(match(TokenType.LPAR)) {

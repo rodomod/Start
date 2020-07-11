@@ -1,3 +1,5 @@
+package own;
+
 public enum TokenType {
     NUMBER,
     HEX_NUMBER,    
