@@ -1,5 +1,3 @@
-package own;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,19 +13,19 @@ public final class Lexer {
     private static final Map<String, TokenType> OPERATOR;
             static {
         OPERATOR = new HashMap<>();
-        OPERATOR.put("+", TokenType.SUMM);
+        OPERATOR.put("+", TokenType.SUM);
         OPERATOR.put("-", TokenType.SUB);
-        OPERATOR.put("*", TokenType.MULL);
-        OPERATOR.put("/", TokenType.DIVIDE);
-        OPERATOR.put("(", TokenType.LPAR);
-        OPERATOR.put(")", TokenType.PPAR);
+        OPERATOR.put("*", TokenType.MUL);
+        OPERATOR.put("/", TokenType.DIV);
+        OPERATOR.put("(", TokenType.LP);
+        OPERATOR.put(")", TokenType.PP);
                  }
     
     private final  String str;
     private final  int length;
     private final  List<Token> tokens;
     private final  StringBuilder buffer;
-    private int pos;
+    private int num;
 public Lexer(String str) {
         this.str = str;
         length = str.length();
@@ -35,7 +33,7 @@ public Lexer(String str) {
         buffer = new StringBuilder();
          }
 public List<Token> lexser() {
-        while(pos < length) {
+        while(num < length) {
             final char current = peek(0);
             if(Character.isDigit(current)) lexserNumber();
            else if(current == '#') {
@@ -68,7 +66,7 @@ private void lexserNumber() {
             buffer.append(current);
             current = next();
             }
-        addToken(TokenType.NUMBER, buffer.toString());
+        addToken(TokenType.NUM, buffer.toString());
           }
 private void lexserHexNumber() {
         clearBuffer();
@@ -80,7 +78,7 @@ private void lexserHexNumber() {
             current = next();
         }
         if(buffer.length() > 0) {
-            addToken(TokenType.HEX_NUMBER, buffer.toString());
+            addToken(TokenType.HEX_NUM, buffer.toString());
         }
     }
 private static boolean isHexNumber(char current) {
@@ -114,13 +112,13 @@ private void clearBuffer() {
         buffer.setLength(0);
     }
 private char next() {
-        pos++;
-             return peek(0);                        
+        num++;
+             return peek(0);
     }
-private char peek(int realPosition) {
-        final int position = pos + realPosition;
-        if(position >= length) return '\0';
-        return str.charAt(position);
+private char peek(int col) {
+        final int ix = num + col;
+        if(ix >= length) return '\0';
+        return str.charAt(ix);
     }
 private void addToken(TokenType type) {
         addToken(type, "");

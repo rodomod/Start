@@ -1,17 +1,15 @@
-package own;
-
 public enum TokenType {
-    NUMBER,
-    HEX_NUMBER,    
+    NUM,  // chislo
+    HEX_NUM,  // heh chislo
     
-    LPAR,        //  (
-    PPAR,       //  )
+    LP,   //  (
+    PP,  //  )
     
-    MULL,     //  *
-    DIVIDE,  //  /
-    SUMM,   //  +
-    SUB,   //  -
+    MUL,  //  *
+    DIV,  //  /
+    SUM,  //  +
+    SUB,  //  -
     
-    EXITOF
+    EXIT
     
     }

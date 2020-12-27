@@ -1,4 +1,3 @@
-package own;
 import java.util.List;
 public final class Start {
 public static void main(String[] args) {
@@ -6,5 +5,5 @@ public static void main(String[] args) {
  final List <Token> tokens = new Lexer(str).lexser();
  for(Token token : tokens) { System.out.println(token); }
  final List <Polisy> polisy = new Parser(tokens).parse();
-       for(Polisy ps : polisy) { System.out.println(ps + " = " + ps.eval()); }
+       for(Polisy ps : polisy) { System.out.println(ps + " = " + ps.cvmf()); }
     } }

@@ -1,7 +1,5 @@
-package own;
-
 public interface Polisy {
-	    double eval();
+	    double cvmf();
 	}
 final class NumberPolisy implements Polisy {
  private final double ps;
@@ -10,7 +8,7 @@ public NumberPolisy(double ps) {
  this.ps = ps;
    }
 @Override
-public double eval() {
+public double cvmf() {
 return ps;
   }
 @Override
@@ -28,14 +26,13 @@ this.operator = operator;
 this.ps1 = ps1;
 this.ps = ps;
     }
-@Override
-public double eval() {
+public double cvmf() {
  switch(operator){
-     case '-': return ps1.eval() - ps.eval();
-     case'*' : return ps1.eval() * ps.eval();
-     case'/' : return ps1.eval() / ps.eval();
+     case '-': return ps1.cvmf() - ps.cvmf();
+     case'*' : return ps1.cvmf() * ps.cvmf();
+     case'/' : return ps1.cvmf() / ps.cvmf();
      case'+' :
-         default : return ps1.eval() + ps.eval();
+         default : return ps1.cvmf() + ps.cvmf();
                 }
     }
 @Override
@@ -52,11 +49,11 @@ public UnaryPolisy(char operator, Polisy ps) {
     this.ps = ps;
      }
    @Override
-public double eval() {
+public double cvmf() {
     switch (operator) {
-        case '-': return -ps.eval();
+        case '-': return -ps.cvmf();
         case '+':
-           default: return ps.eval();
+           default: return ps.cvmf();
         }
    }
 @Override
